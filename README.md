@@ -17,7 +17,9 @@ This project is designed to forecast cryptocurrency market volatility by integra
 
 ```
 .
-├── data_pipeline.py   # Sentiment + market data collection pipeline
+├── Jupyter_files
+|    |__ File1.py
+|    |__ File2.py   # Sentiment + market data collection pipeline
 │ 
 ├── Data_set/
 │   ├── reddit_data_raw.csv
@@ -87,9 +89,11 @@ REDDIT_USER_AGENT=your_user_agent
 
 ### 🔵 Market Data Engineering
 
-- Price and volume data is processed for volatility using rolling standard deviation of returns.
-- Lagged features (1 to 7 days) are generated for market and sentiment trends.
-- Combined into a single feature-rich dataset (`final_data.csv`).
+- Volatility Computation: Price and volume data are used to compute rolling standard deviations of log returns, capturing recent market turbulence and stability patterns.
+
+- Lag Feature Generation: Lagged values (1 to 7 days) for price, volume, and sentiment scores are engineered to capture temporal dependencies and trend momentum.
+
+- Signal-Enriched Dataset: These engineered features are combined into a unified dataset (final_data.csv) that encapsulates both historical market behavior and sentiment dynamics—providing a rich foundation for learning market signals such as bullish surges, bearish downturns, or neutral consolidations.
 
 ---
 
@@ -102,11 +106,12 @@ We explored multiple modeling strategies, comparing traditional statistical mode
 
 - **Time Series Models:**
   - ARIMA: For capturing autoregressive and moving average patterns in volatility
-  - GARCH: Known for modeling financial time series volatility
+  - LSTM: Known for modeling financial time series volatility
 
 - **Machine Learning Models:**
   - **Random Forest (Selected):** Provided the best performance and interpretability
   - XGBoost and LightGBM were also evaluated but offered no significant accuracy gain
+  _ RandomForest Classifier - Market Signal Prediction
   
 - **Validation Strategy:** Time-series aware cross-validation.
 - **Model Evaluation:** Metrics used include Mean Absolute Error and Mean Squared Error.
